@@ -7,6 +7,7 @@ A spiral torsioin spring (STS) is a spring that occupies a cylindrical volume wi
 2. the minimum height under stiffness, radius, and ROM constraints
 3. the minimum radius under height, stiffness and ROM constraints.
 4. the maximum ROM under stiffness, height, and radius constraints.
+
 All of these optimization goals would also be subject to general feasibility constraints; for instance, the spring must stay within its material's elastic zone at the end of it's range of motion.
 The problem quickly becomes more complicated when we add in more spring parameters that a designer might require, such as the spring's preload torque, and the distance between spring coils at the end of its ROM (so the spring does not collide with itself). Let's define some possible states for our spring:
 1. Rest state
