@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A spiral torsioin spring (STS) is a spring that occupies a cylindrical volume with a height and a radius and has an angular range of motion (ROM) around the center axis of that cylinder. In this project I use the term "height" to refer to the dimension of the spring that is parallel with the cylinder center axis, and the term "thickness" to refer to the dimension that runs perpendicular to the spiral tangent. There are several potential optimization goals one might have in designing an STS; one might want to find:
+A spiral torsioin spring (STS) is a spring that occupies a cylindrical volume and has an angular range of motion (ROM) around the center axis of that cylinder. In this project I use the term "height" to refer to the dimension of the spring that is parallel with the cylinder center axis, and the term "thickness" to refer to the dimension that runs perpendicular to the spiral tangent. There are several potential optimization goals one might have in designing an STS; one might want to find:
 1. the maximum thickness under height, radius, and ROM constraints
 2. the minimum height under stiffness, radius, and ROM constraints
 3. the minimum radius under height, stiffness and ROM constraints.
