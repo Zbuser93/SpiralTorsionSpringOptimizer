@@ -1,16 +1,16 @@
-from math import pi, sqrt
+from numpy import pi, sqrt
 
 # Settings:
 nozzle_diameter = 0.4
 elasticity = 3100
 yield_stress = 83
 safety_factor = 0.75
-min_coil_distance = 0.25
-center_pad_radius = 10
+min_coil_distance = 0.5
+center_pad_radius = 15
 
 # Inputs:
-ROM_opt_input = 6.28
-torque_pre_input = 0.1
+ROM_opt_input = pi / 2
+torque_pre_input = 10
 height_input = 4
 thickness_input = 3
 stiffness_input = 323.53

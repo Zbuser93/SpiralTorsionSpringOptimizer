@@ -1,0 +1,36 @@
+E	3100.00 MPa
+σy	83.00 MPa
+δ	0.75
+dnoz	0.40
+
+Step 1: Inputs
+Δθopt	1.57 rad
+τpre	10.00 N mm
+p0	0.50 mm
+rC	15.00 mm
+h	4.00 mm
+t	1.54 mm
+K	17.71 N mm/rad
+
+Step 2: Check constraints and troubleshooter
+C1	-38.25
+C2	-12.96
+C3	-0.74
+
+Step 3: Copy and paste C24-C29 into CAD file
+h	4.00
+t	1.54
+rC	15.00
+pR	7.39
+p0	0.50
+nE	1.57
+dnoz	0.40
+
+Step 4: Use torque tester to determine actual Young’s modulus; repeat all steps (optional)
+Ttest
+Δθtest
+Etest	#DIV/0!
+
+r	25.00 mm
+
+When setting the script inputs to these settings copied from the spreadsheet, the script calculates a max arclength lower than what the spreadsheet solver arrives at; script arclength calculations must be wrong
