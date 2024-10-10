@@ -32,5 +32,3 @@ Ttest
 Etest	#DIV/0!
 
 r	25.00 mm
-
-When setting the script inputs to these settings copied from the spreadsheet, the script calculates a max arclength lower than what the spreadsheet solver arrives at; script arclength calculations must be wrong

@@ -5,7 +5,7 @@ nozzle_diameter = 0.4
 elasticity = 3100
 yield_stress = 83
 safety_factor = 0.75
-min_coil_distance = 0.5
+min_coil_distance = 0.25
 center_pad_radius = 15
 
 # Inputs:
@@ -33,7 +33,7 @@ def calculate_profile_radius(
 
 def calculate_radius_E(
         thickness):
-    return center_pad_radius + thickness / 2
+    return center_pad_radius + thickness / 2 + min_coil_distance
 
 
 def calculate_theta_EMD(
