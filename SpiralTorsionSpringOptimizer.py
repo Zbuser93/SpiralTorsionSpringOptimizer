@@ -111,43 +111,6 @@ def optimize_spring():
     print(f'stress constraint: {round(output[9], 2)}')
 
 
-'''def optimize_spring():
-    initial_guess = np.array(
-        [height_input, min_arclength_E_thickness, min_arclength_E, ROM_opt_input, torque_pre_input]
-    )
-    bounds = Bounds(
-        [height_input, min_thickness, min_arclength_E, ROM_opt_input, torque_pre_input],
-        [height_input, max_thickness, max_arclength_E, ROM_opt_input, torque_pre_input]
-    )
-    constraints = [
-        {'type': 'ineq', 'fun': stress_constraint},
-        {'type': 'ineq', 'fun': positive_radius_constraint},
-        {'type': 'eq', 'fun': max_radius_constraint},
-        {'type': 'ineq', 'fun': aspect_ratio_constraint}
-    ]
-    solution = minimize(
-        fun=negative_stiffness,
-        x0=initial_guess,
-        bounds=bounds,
-        constraints=constraints
-    )
-    print('Status : %s' % solution['message'])
-    print('Total Evaluations: %d' % solution['nfev'])
-    print()
-    print(f'height: {output[0]}mm')
-    print(f'thickness: {output[1]}mm')
-    print(f'center pad radius: {output[2]}mm')
-    print(f'pitch @ rest: {output[3]}')
-    print(f'profile radius: {output[4]}mm')
-    print(f'profile revolutions: {output[5]}')
-    print(f'radius @ preload deformation: {output[6]}mm')
-    print(f'radius @ rest: {output[10]}mm')
-    print(f'range of motion from rest: {output[11]}')
-    print(f'spring arclength: {output[7]}mm')
-    print(f'spring stiffness: {output[8]}Nmm/RAD')
-    print(f'stress constraint: {round(output[9], 2)}')'''
-
-
 if __name__ == '__main__':
     print()
     optimize_spring()
