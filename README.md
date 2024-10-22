@@ -1,5 +1,7 @@
 # Spiral-Torsion-Spring Optimizer
 
+For the fully-functional spreadsheet-based version of this project, see the page on [Printables](https://www.printables.com/model/485731-spiral-torsion-spring-optimizer-v3).
+
 ## Introduction
 
 A spiral torsion spring (STS) is a spring that occupies a cylindrical volume and has an angular range of motion (ROM) around the center axis of that cylinder. In this project I use the term "height" to refer to the dimension of the spring that is parallel with the cylinder center axis, and the term "thickness" to refer to the dimension that runs perpendicular to the spiral tangent. There are several potential optimization goals one might have in designing an STS, for instance, one might want to find:
