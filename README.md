@@ -27,11 +27,11 @@ There are many properties to a spiral torsion spring. Depending on the optimizat
 
 Settings:
 1. _r<sub>max</sub>_
-    - The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness)
+    - The maximum allowable outer radius of the spring (does not account for spring thickness)
 2. _r<sub>C</sub>_
     - The radius of the center pad of the spring (the part which connects to or contains the center axle)
 3. _p<sub>0</sub>_
-    - The distance between spring coils at MD state
+    - Gap between spring coils at MD state
 4. _Δθ<sub>opt</sub>_
     - Desired range of motion of the spring from preload state to MD state
 5. _τ<sub>pre</sub>_
@@ -49,7 +49,7 @@ Material Data:
 
 Variables:
 1. _t_
-    - Spring thickness
+    - Spring thickness (on x-y print bed plane if 3D printing)
 2. _L<sub>E</sub>_
     - Arclength of the effective portion of the spring
 
@@ -67,11 +67,11 @@ Intermediary Calculations:
 4. _σ<sub>max</sub>_
     - Stress on spring at MD state
 5. _r<sub>pre</sub>_
-    - Outer radius at preload state
+    - Outer radius at preload state (does not account for spring thickness)
 6. _θ<sub>E</sub>_
     - θ (polar coordinate) of effective portion of spring at rest state
 7. _r<sub>R</sub>_
-    - Outer radius of spring at rest state
+    - Outer radius of spring at rest state (does not account for spring thickness)
 
 Constraints:
 1. _C<sub>1</sub>_
