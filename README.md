@@ -21,6 +21,35 @@ The problem becomes a little more complicated when we add in more spring paramet
 4. End state
    - This is the spring deformed or twisted as far as it possibly can be, where the spring coils have collided with eachother and stopped any further deformation. This may be the same as the closed state if no minimum coil distance is set. This tool will not require that the spring stay within its elastic zone at the spring's end state, so pushing the spring past it's closed state may result in permanent damage to the spring. Therefore it is advisable to design the host device so that it either physically stops the spring from going past MD, or so that it would otherwise not be possible for the spring to exceed MD in normal operation.
 
+There are many properties to a spiral torsion spring. Depending on the optimization goal, some will be inputs, some will be outputs, and some intermediary calculations. Of the inputs, some are material properties, and some will either be variables or "settings" (essentially constraints) depending on the optimization goal. In the case of goal 1 (maximizing stiffness), the properties are organized as follows:
+
+[Diagram](/Images/DiagramMaxStiffness.png)
+
+1. _r<sub>max</sub>_
+   -The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness).
+2. _r<sub>C</sub>_
+   -The radius of the center pad of the spring (the part which connects to or contains the center axle).
+3. _p<sub>0</sub>_
+   -The distance between spring coils at MD.
+4. _Δθ<sub>opt</sub>_
+   -Desired range of motion of the spring from preload state to MD.
+5. _τ<sub>pre</sub>_
+   -Amount of torque exerted by spring at preload state.
+6. _t_
+   -Spring thickness
+7. _h_
+   -Spring height (z-axis print height if 3D printing).
+8. _L<sub>E</sub>_
+   -Arclength of the effective portion of the spring
+9. _E_
+   -Elasticity of the material (Young's modulus)
+10. _σ<sub>y</sub>_
+   -Material's yield stress
+11. _δ_
+   -Safety factor (maximum portion of yield stress to be used)
+
+
+
 ## Current State of the Project
 
 Currently the script will sucessfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
