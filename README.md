@@ -23,7 +23,7 @@ The problem becomes a little more complicated when we add in more spring paramet
 
 There are many properties to a spiral torsion spring. Depending on the optimization goal, some will be inputs, some will be outputs, and some intermediary calculations. Of the inputs, some are material properties, and some will either be variables or "settings" (essentially constraints) depending on the optimization goal. In the case of goal 1 (maximizing stiffness), the properties are organized as follows:
 
-[Diagram](/Images/DiagramMaxStiffness.png)
+![Diagram](/Images/DiagramMaxStiffness.png)
 
 1. _r<sub>max</sub>_
    -The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness).
