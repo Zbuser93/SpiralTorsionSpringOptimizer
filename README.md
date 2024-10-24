@@ -25,30 +25,61 @@ There are many properties to a spiral torsion spring. Depending on the optimizat
 
 ![Diagram](/Images/DiagramMaxStiffness.png)
 
+Settings:
 1. _r<sub>max</sub>_
+
    -The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness).
-2. _r<sub>C</sub>_
+3. _r<sub>C</sub>_
+
    -The radius of the center pad of the spring (the part which connects to or contains the center axle).
-3. _p<sub>0</sub>_
+5. _p<sub>0</sub>_
+
    -The distance between spring coils at MD.
-4. _Δθ<sub>opt</sub>_
+7. _Δθ<sub>opt</sub>_
+
    -Desired range of motion of the spring from preload state to MD.
-5. _τ<sub>pre</sub>_
+9. _τ<sub>pre</sub>_
+
    -Amount of torque exerted by spring at preload state.
-6. _t_
-   -Spring thickness
-7. _h_
-   -Spring height (z-axis print height if 3D printing).
-8. _L<sub>E</sub>_
-   -Arclength of the effective portion of the spring
-9. _E_
+11. _h_
+
+    -Spring height (z-axis print height if 3D printing).
+13. _δ_
+
+    -Safety factor (maximum portion of yield stress to be used)
+
+Material Data:
+1. _E_
    -Elasticity of the material (Young's modulus)
-10. _σ<sub>y</sub>_
+2. _σ<sub>y</sub>_
    -Material's yield stress
-11. _δ_
-   -Safety factor (maximum portion of yield stress to be used)
 
+Variables:
+1. _t_
+   -Spring thickness
+2. _L<sub>E</sub>_
+   -Arclength of the effective portion of the spring
 
+PSO Target:
+1. _K_
+
+Intermediary Calculations:
+1. _r<sub>E</sub>_
+2. _Δθ<sub>R</sub>_
+3. _θ<sub>EMD</sub>_
+4. _σ<sub>max</sub>_
+5. _r<sub>pre</sub>_
+6. _θ<sub>E</sub>_
+7. _r<sub>R</sub>_
+
+Constraints:
+1. _C<sub>1</sub>_
+2. _C<sub>2</sub>_
+3. _C<sub>3</sub>_
+
+Outputs:
+1. _n<sub>R</sub>_
+2. _p<sub>R</sub>_
 
 ## Current State of the Project
 
