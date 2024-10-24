@@ -19,7 +19,7 @@ The problem becomes a little more complicated when we add in more spring paramet
 3. Maximum deformation (MD) state
     - The spring at the very end of its useful ROM. This may not be as far as the spring can physically be deformed. This tool will require that the spring stays within its material's elastic zone at this state. If we want the spring to stop before it collides with itself (for instance, to avoid the resulting friction) then we must create another parameter of minimum coil distance. This parameter may sound innocuous, but in reality even at low values it can have an enormous effect on the spring's pitch.
 4. End state
-    - This is the spring deformed or twisted as far as it possibly can be, where the spring coils have collided with eachother and stopped any further deformation. This may be the same as the closed state if no minimum coil distance is set. This tool will not require that the spring stay within its elastic zone at the spring's end state, so pushing the spring past it's closed state may result in permanent damage to the spring. Therefore it is advisable to design the host device so that it either physically stops the spring from going past MD, or so that it would otherwise not be possible for the spring to exceed MD in normal operation.
+    - This is the spring deformed or twisted as far as it possibly can be, where the spring coils have collided with each other and stopped any further deformation. This may be the same as the closed state if no minimum coil distance is set. This tool will not require that the spring stay within its elastic zone at the spring's end state, so pushing the spring past it's closed state may result in permanent damage to the spring. Therefore, it is advisable to design the host device so that it either physically stops the spring from going past MD, or so that it would otherwise not be possible for the spring to exceed MD in normal operation.
 
 There are many properties to a spiral torsion spring. Depending on the optimization goal, some will be inputs, some will be outputs, and some intermediary calculations. Of the inputs, some are material properties, and some will either be variables or "settings" (essentially constraints) depending on the optimization goal. In the case of goal 1 (maximizing stiffness), the properties are organized as follows:
 
@@ -81,7 +81,7 @@ Constraints:
 1. _C<sub>1</sub>_
     - Stress constraint
 2. _C<sub>2</sub>_
-    - Postitive radius constraint
+    - Positive radius constraint
 3. _C<sub>3</sub>_
     - Max radius constraint
 
@@ -93,6 +93,6 @@ Outputs:
 
 ## Current State of the Project
 
-The script will sucessfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
+The script will successfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
 
 Currently, this project only supports goal 1, though I do plan to support all possible optimization goals in the future. Each optimization goal will have its own constructor method within the SpiralTorsionSpring class, in order to handle the different spring property layouts of each goal.
