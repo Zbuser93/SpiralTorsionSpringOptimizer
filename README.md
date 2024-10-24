@@ -27,65 +27,65 @@ There are many properties to a spiral torsion spring. Depending on the optimizat
 
 Settings:
 1. _r<sub>max</sub>_
-  - The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness)
+    - The maximum allowable radius of the spring. Measured from origin to the middle of the end of the spring (does not account for spring thickness)
 2. _r<sub>C</sub>_
-  - The radius of the center pad of the spring (the part which connects to or contains the center axle)
+    - The radius of the center pad of the spring (the part which connects to or contains the center axle)
 3. _p<sub>0</sub>_
-  - The distance between spring coils at MD state
+    - The distance between spring coils at MD state
 4. _Δθ<sub>opt</sub>_
-  - Desired range of motion of the spring from preload state to MD state
+    - Desired range of motion of the spring from preload state to MD state
 5. _τ<sub>pre</sub>_
-  - Amount of torque exerted by spring at preload state
+    - Amount of torque exerted by spring at preload state
 6. _h_
-  - Spring height (z-axis print height if 3D printing)
+    - Spring height (z-axis print height if 3D printing)
 7. _δ_
-  - Safety factor (maximum portion of yield stress to be used)
+    - Safety factor (maximum portion of yield stress to be used)
 
 Material Data:
 1. _E_
-  - Elasticity of the material (Young's modulus)
+    - Elasticity of the material (Young's modulus)
 2. _σ<sub>y</sub>_
-  - Material's yield stress
+    - Material's yield stress
 
 Variables:
 1. _t_
-  - Spring thickness
+    - Spring thickness
 2. _L<sub>E</sub>_
-  - Arclength of the effective portion of the spring
+    - Arclength of the effective portion of the spring
 
 PSO Target:
 1. _K_
-  - Stiffness (spring constant)
+    - Stiffness (spring constant)
 
 Intermediary Calculations:
 1. _r<sub>E</sub>_
-  - Inner radius of effective portion of spring
+    - Inner radius of effective portion of spring
 2. _Δθ<sub>R</sub>_
-  - Range of motion from rest to MD state
+    - Range of motion from rest to MD state
 3. _θ<sub>EMD</sub>_
-  - θ (polar coordinate) of effective portion of spring at MD state
+    - θ (polar coordinate) of effective portion of spring at MD state
 4. _σ<sub>max</sub>_
-  - Stress on spring at MD state
+    - Stress on spring at MD state
 5. _r<sub>pre</sub>_
-  - Outer radius at preload state
+    - Outer radius at preload state
 6. _θ<sub>E</sub>_
-  - θ (polar coordinate) of effective portion of spring at rest state
+    - θ (polar coordinate) of effective portion of spring at rest state
 7. _r<sub>R</sub>_
-  - Outer radius of spring at rest state
+    - Outer radius of spring at rest state
 
 Constraints:
 1. _C<sub>1</sub>_
-  - Stress constraint
+    - Stress constraint
 2. _C<sub>2</sub>_
-  - Postitive radius constraint
+    - Postitive radius constraint
 3. _C<sub>3</sub>_
-  - Max radius constraint
+    - Max radius constraint
 
 Outputs:
 1. _n<sub>R</sub>_
-  - Number of spring coil revolutions at rest state
+    - Number of spring coil revolutions at rest state
 2. _p<sub>R</sub>_
-  - Spring pitch at rest state
+    - Spring pitch at rest state
 
 ## Current State of the Project
 
