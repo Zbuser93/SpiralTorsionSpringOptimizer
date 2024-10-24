@@ -10,7 +10,7 @@ A spiral torsion spring (STS) is a spring that occupies a cylindrical volume and
 3. The minimum radius under height, stiffness and ROM constraints.
 4. The maximum ROM under stiffness, height, and radius constraints.
 
-Currently, this project only supports goal 1, though I do plan to support all possible optimization goals in the future. All of these optimization goals would also be subject to general feasibility constraints, for instance, the spring must stay within its material's elastic zone at the end of its range of motion.
+All of these optimization goals would also be subject to general feasibility constraints, for instance, the spring must stay within its material's elastic zone at the end of its range of motion.
 The problem becomes a little more complicated when we add in more spring parameters that a designer might require, such as the spring's preload torque and the distance between spring coils at the end of its ROM (so the spring does not collide with itself). Let's define some possible states for our spring:
 1. Rest state
     - The spring with zero angular force applied. This is the state the spring will be in before it is assembled into the host device, and how the spring will be printed if it is to be made by 3D-printing.
@@ -89,4 +89,6 @@ Outputs:
 
 ## Current State of the Project
 
-Currently the script will sucessfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
+The script will sucessfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
+
+Currently, this project only supports goal 1, though I do plan to support all possible optimization goals in the future. Each optimization goal will have its own constructor method within the SpiralTorsionSpring class, in order to handle the different spring property layouts of each goal.
