@@ -1,4 +1,4 @@
-# Spiral-Torsion-Spring Optimizer
+# Spiral Torsion Spring Optimizer
 
 For the fully-functional spreadsheet-based version of this project, see the page on [Printables](https://www.printables.com/model/485731-spiral-torsion-spring-optimizer-v3).
 
