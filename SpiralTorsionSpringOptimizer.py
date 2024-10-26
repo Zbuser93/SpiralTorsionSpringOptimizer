@@ -2,23 +2,74 @@ import numpy as np
 from pyswarm import pso
 
 class SpiralTorsionSpring:
-    def __init__(self, height, thickness, radius_center, pitch_0, pitch_R, number_revolutions):
+    def __init__(
+            self, height, thickness, radius_center, pitch_0, pitch_R, number_revolutions,
+            arclength_E, elasticity, radius_pre, deltatheta_opt, torque_pre, safety_factor,
+            stress_yield, stiffness, unutilized_elasticity, torque_pre_max
+    ):
         self.height = height
         self.thickness = thickness
         self.radius_center = radius_center
         self.pitch_0 = pitch_0
         self.pitch_R = pitch_R
         self.number_revolutions = number_revolutions
+        self.arclength_E = arclength_E
+        self.elasticity = elasticity
+        self.radius_pre = radius_pre
+        self.deltatheta_opt = deltatheta_opt
+        self.torque_pre = torque_pre
+        self.safety_factor = safety_factor
+        self.stress_yield = stress_yield
+        self.stiffness = stiffness
+        self.unutilized_elasticity = unutilized_elasticity
+        self.torque_pre_max = torque_pre_max
 
     def __repr__(self):
-        return[
-            print(f'height: {self.height}mm'),
-            print(f'thickness: {self.thickness}mm'),
-            print(f'center pad radius: {self.radius_center}mm'),
-            print(f'minimum coil distance: {self.pitch_0}mm'),
-            print(f'pitch @ rest: {self.pitch_R}'),
-            print(f'revolutions at rest: {self.number_revolutions}')
-        ]
+        if round(self.unutilized_elasticity) == 0:
+            return [
+                print(''),
+                print('Properties:'),
+                print(f'Elasticity: {round(self.elasticity, 2)}MPa'),
+                print(f'Yield stress: {round(self.stress_yield, 2)}MPa'),
+                print(f'Safety factor: {self.safety_factor}'),
+                print(f'Stiffness: {round(self.stiffness, 2)}Nmm/rad'),
+                print(f'Outer radius at preload: {round(self.radius_pre, 2)}mm'),
+                print(f'Arclength of spring: {round(self.arclength_E, 2)}mm'),
+                print(f'Range of motion: {self.deltatheta_opt}rad'),
+                print(f'Preload torque: {self.torque_pre}Nmm'),
+                print(''),
+                print('Physical Dimensions (output to CAD):'),
+                print(f'Height: {self.height}mm'),
+                print(f'Thickness: {round(self.thickness, 2)}mm'),
+                print(f'Center pad radius: {self.radius_center}mm'),
+                print(f'Minimum coil distance: {self.pitch_0}mm'),
+                print(f'Pitch @ rest: {round(self.pitch_R, 2)}mm'),
+                print(f'Revolutions at rest: {round(self.number_revolutions, 2)}'),
+            ]
+        else:
+            return [
+                print(''),
+                print('Properties:'),
+                print(f'Elasticity: {round(self.elasticity, 2)}MPa'),
+                print(f'Yield stress: {round(self.stress_yield, 2)}MPa'),
+                print(f'Safety factor: {self.safety_factor}'),
+                print(f'Stiffness: {round(self.stiffness, 2)}Nmm/rad'),
+                print(f'Outer radius at preload: {round(self.radius_pre, 2)}mm'),
+                print(f'Arclength of spring: {round(self.arclength_E, 2)}mm'),
+                print(f'Range of motion: {self.deltatheta_opt}rad'),
+                print(f'Preload torque: {self.torque_pre}Nmm'),
+                print(''),
+                print('Physical Dimensions (output to CAD):'),
+                print(f'Height: {self.height}mm'),
+                print(f'Thickness: {round(self.thickness, 2)}mm'),
+                print(f'Center pad radius: {self.radius_center}mm'),
+                print(f'Minimum coil distance: {self.pitch_0}mm'),
+                print(f'Pitch @ rest: {round(self.pitch_R, 2)}mm'),
+                print(f'Revolutions at rest: {round(self.number_revolutions, 2)}'),
+                print(''),
+                print(f'This spring leaves {round(self.unutilized_elasticity, 2)}MPa of elasticity unutilized!'),
+                print(f'Increase preload torque to {round(self.torque_pre_max, 2)}Nmm to fully utilize elasticity.')
+            ]
 
     @classmethod
     def maximize_stiffness(
@@ -54,16 +105,35 @@ class SpiralTorsionSpring:
         #calculate remaining properties:
         thickness = xopt[0]
         arclength_E = xopt[1]
-        radius_E = cls.calculate_radius_E(thickness, radius_center, pitch_0)
-        deltatheta_R = cls.calculate_deltatheta_R(height, elasticity, thickness, arclength_E, deltatheta_opt, torque_pre)
-        theta_EMD = cls.calculate_theta_EMD(arclength_E, thickness, radius_E, pitch_0)
-        theta_E = cls.calculate_theta_E(theta_EMD, deltatheta_R)
-        radius_R = cls.calculate_radius_R(arclength_E, theta_E, radius_E)
-        pitch_R = cls.calculate_pitch_R(radius_R, radius_E, theta_E)
-        number_revolutions = cls.calculate_number_revolutions(theta_E)
+        stiffness = -fopt
+        radius_E =(
+            cls.calculate_radius_E(thickness, radius_center, pitch_0))
+        deltatheta_R =(
+            cls.calculate_deltatheta_R(height, elasticity, thickness, arclength_E, deltatheta_opt, torque_pre))
+        theta_EMD =(
+            cls.calculate_theta_EMD(arclength_E, thickness, radius_E, pitch_0))
+        radius_pre =(
+            cls.calculate_radius_pre(arclength_E, theta_EMD, deltatheta_opt, radius_E))
+        theta_E =(
+            cls.calculate_theta_E(theta_EMD, deltatheta_R))
+        radius_R =(
+            cls.calculate_radius_R(arclength_E, theta_E, radius_E))
+        pitch_R =(
+            cls.calculate_pitch_R(radius_R, radius_E, theta_E))
+        number_revolutions =(
+            cls.calculate_number_revolutions(theta_E))
+        stress_max =(
+            cls.calculate_stress_max(thickness, deltatheta_R, arclength_E, elasticity))
+        unutilized_elasticity =(
+            cls.calculate_unutilized_elasticity(safety_factor, stress_yield, stress_max))
+        torque_pre_max =(
+            cls.calculate_torque_pre_max(
+                height, thickness, arclength_E, safety_factor, stress_yield, elasticity, deltatheta_opt))
 
         #create instance:
-        return cls(height, thickness, radius_center, pitch_0, pitch_R, number_revolutions)
+        return cls(height, thickness, radius_center, pitch_0, pitch_R, number_revolutions,
+                   arclength_E, elasticity, radius_pre, deltatheta_opt, torque_pre, safety_factor,
+                   stress_yield, stiffness, unutilized_elasticity, torque_pre_max)
 
     '''the next two functions are not static, but must be treated as such due to a bug in pyswarm'''
     @staticmethod
@@ -79,11 +149,17 @@ class SpiralTorsionSpring:
         torque_pre = args[6]
         safety_factor = args[7]
         stress_yield = args[8]
-        radius_E = SpiralTorsionSpring.calculate_radius_E(thickness, radius_center, pitch_0)
-        deltatheta_R = SpiralTorsionSpring.calculate_deltatheta_R(height, elasticity, thickness, arclength_E, deltatheta_opt, torque_pre)
-        theta_EMD = SpiralTorsionSpring.calculate_theta_EMD(arclength_E, thickness, radius_E, pitch_0)
-        stress_max = SpiralTorsionSpring.calculate_stress_max(thickness, deltatheta_R, arclength_E, elasticity)
-        radius_pre = SpiralTorsionSpring.calculate_radius_pre(arclength_E, theta_EMD, deltatheta_opt, radius_E)
+        radius_E =(
+            SpiralTorsionSpring.calculate_radius_E(thickness, radius_center, pitch_0))
+        deltatheta_R =(
+            SpiralTorsionSpring.calculate_deltatheta_R(
+                height, elasticity, thickness, arclength_E, deltatheta_opt, torque_pre))
+        theta_EMD =(
+            SpiralTorsionSpring.calculate_theta_EMD(arclength_E, thickness, radius_E, pitch_0))
+        stress_max =(
+            SpiralTorsionSpring.calculate_stress_max(thickness, deltatheta_R, arclength_E, elasticity))
+        radius_pre =(
+            SpiralTorsionSpring.calculate_radius_pre(arclength_E, theta_EMD, deltatheta_opt, radius_E))
         #stress constraint:
         c1 = -(stress_max - safety_factor * stress_yield)
         #positive radius constraint:
@@ -167,21 +243,33 @@ class SpiralTorsionSpring:
             stress_max, height, thickness):
         return (stress_max * height * thickness ** 2) / 6
 
+    @staticmethod
+    def calculate_unutilized_elasticity(
+            safety_factor, stress_yield, stress_max):
+        return safety_factor * stress_yield - stress_max
+
+    @staticmethod
+    def calculate_torque_pre_max(
+            height, thickness, arclength_E, safety_factor, stress_yield, elasticity, deltatheta_opt):
+        return (((height * thickness ** 2 * 2 * arclength_E * safety_factor * stress_yield)
+                - (elasticity * height * thickness ** 3 * deltatheta_opt))
+                / (12 * arclength_E))
+
 if __name__ == '__main__':
     input_height = 4
     input_elasticity = 3100
     input_max_radius_pre = 25
     input_radius_center = 8
     input_pitch_0 = 0.5
-    input_deltatheta_opt = 3
+    input_deltatheta_opt = 6
     input_torque_pre = 10
     input_safety_factor = .75
     input_stress_yield = 83
     input_max_thickness = 4
     input_nozzle_diameter = 0.4
-    spring1 = SpiralTorsionSpring.maximize_stiffness(
+    spring = SpiralTorsionSpring.maximize_stiffness(
         input_height, input_elasticity, input_max_radius_pre, input_radius_center, input_pitch_0,
         input_deltatheta_opt, input_torque_pre, input_safety_factor, input_stress_yield,
         max_thickness=input_max_thickness, nozzle_diameter=input_nozzle_diameter
     )
-    spring1.__repr__()
+    spring.__repr__()
