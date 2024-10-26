@@ -67,13 +67,13 @@ Intermediary Calculations:
 2. _Δθ<sub>R</sub>_
     - Range of motion from rest to MD state
 3. _θ<sub>EMD</sub>_
-    - θ (polar coordinate) of effective portion of spring at MD state
+    - θ (radians) of effective portion of spring at MD state
 4. _σ<sub>max</sub>_
     - Stress on spring at MD state
 5. _r<sub>pre</sub>_
     - Outer radius at preload state (does not account for spring thickness)
 6. _θ<sub>E</sub>_
-    - θ (polar coordinate) of effective portion of spring at rest state
+    - θ (radians) of effective portion of spring at rest state
 7. _r<sub>R</sub>_
     - Outer radius of spring at rest state (does not account for spring thickness)
 
