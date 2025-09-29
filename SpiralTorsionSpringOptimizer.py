@@ -48,7 +48,8 @@ class SpiralTorsionSpring:
             print(f'Center pad radius: {self.radius_center}mm'),
             print(f'Minimum coil distance: {self.pitch_0}mm'),
             print(f'Pitch @ rest: {round(self.pitch_R, 2)}mm'),
-            print(f'Revolutions at rest: {round(self.number_revolutions, 2)}')
+            print(f'Revolutions at rest: {round(self.number_revolutions, 2)}'),
+            print(f'Inner spiral radius: {round(self.radius_center + self.thickness/2 + self.pitch_0)}')
         ]
         if round(self.unutilized_elasticity) != 0:
             rep.append([
