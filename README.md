@@ -1,6 +1,6 @@
 # Spiral Torsion Spring Optimizer
 
-For the spreadsheet-based version of this project, and the FreeCAD files intended for use with this calculator, see the page on [Printables](https://www.printables.com/model/485731-spiral-torsion-spring-optimizer-v3).
+For the spreadsheet-based version of this project, and the FreeCAD files intended for use with this calculator, see the page on [Printables](https://www.printables.com/model/485731-spiral-torsion-spring-optimizer-v3). The Printables page also contains some more practical documentation for this project, including how to find or calculate your material's elasticity. What follows is a more theoretical explanation of what this project aims to acheive.
 
 ## Introduction
 
@@ -95,4 +95,4 @@ Outputs:
 
 The script will successfully optimize a spring using pyswarm, however you have to somewhat tediously type in the inputs by manually changing the variables. The next step will be to create a GUI that takes the inputs from the user, and a macro for FreeCAD that uses this script to automatically generate the spring.
 
-Currently, this project only supports goal 1, though I do plan to support all possible optimization goals in the future. Each optimization goal will have its own constructor method within the SpiralTorsionSpring class, in order to handle the different spring property layouts of each goal.
+Currently, this project only supports goal 1, though I do plan to support all possible optimization goals in the future. Each optimization goal will have its own constructor method within the SpiralTorsionSpring class, in order to handle the different spring property layouts of each goal. An optimizer for serpentine springs is coming soon as well (the typical 3D printed linear spring, not the bed spring).
