@@ -1,4 +1,4 @@
-from scipy.optimize import NonlinearConstraint, OptimizeResult, brentq, shgo
+from scipy.optimize import NonlinearConstraint, brentq, shgo
 from copy import copy
 import numpy as np
 
@@ -94,13 +94,18 @@ class SpiralTorsionSpring:
         sp.arclength_bounds = (min_arclength_E, max_arclength_E)
 
         # validate bounds:
-        if sp.thickness_bounds[0] > sp.thickness_bounds[1] or sp.arclength_bounds[0] > sp.arclength_bounds[1]:
-            sp.res = OptimizeResult(
-                x=None,
-                success=False,
-                message=f"No solution possible; bounds infeasible"
+        if sp.thickness_bounds[0] > sp.thickness_bounds[1]:
+            raise ValueError(
+                f"No feasible thickness: minimum required {sp.thickness_bounds[0]:.3f}mm "
+                f"(driven by torque_pre={sp.torque_pre:.1f}Nmm) exceeds maximum "
+                f"{sp.thickness_bounds[1]:.3f}mm. Reduce torque_pre or raise max_thickness."
             )
-            return sp
+        if sp.arclength_bounds[0] > sp.arclength_bounds[1]:
+            raise ValueError(
+                f"No feasible spring length: minimum required {sp.arclength_bounds[0]:.1f}mm "
+                f"exceeds available space {sp.arclength_bounds[1]:.1f}mm. "
+                "Increase max_radius_pre, reduce pitch_0, or reduce torque_pre/deltatheta_opt."
+            )
 
         # configure optimizer parameters:
         params = {
@@ -118,24 +123,30 @@ class SpiralTorsionSpring:
             params.update(opt_params)
 
         # optimize spring:
-        sp.res = shgo(                                  # type: ignore
-            func=sp.obj_ms,
-            bounds=(
-                sp.thickness_bounds,
-                sp.arclength_bounds
-            ),
-            constraints=NonlinearConstraint(
-                fun=sp.cons_ms,
-                lb=0,
-                ub=np.inf
-            ),
-            n=params['n'],
-            iters=params['iters'],
-            minimizer_kwargs=params['minimizer_kwargs'],
-            options=params['options'],
-            sampling_method=params['sampling_method'],
-            workers=params['workers']
-        )
+        try:
+            sp.res = shgo(                              # type: ignore
+                func=sp.obj_ms,
+                bounds=(
+                    sp.thickness_bounds,
+                    sp.arclength_bounds
+                ),
+                constraints=NonlinearConstraint(
+                    fun=sp.cons_ms,
+                    lb=0,
+                    ub=np.inf
+                ),
+                n=params['n'],
+                iters=params['iters'],
+                minimizer_kwargs=params['minimizer_kwargs'],
+                options=params['options'],
+                sampling_method=params['sampling_method'],
+                workers=params['workers']
+            )
+        except Exception as e:
+            raise ValueError(
+                f"Optimizer failed: {e}. Inputs may produce a degenerate search space "
+                "(e.g. thickness or arclength bounds with near-zero width)."
+            )
 
         # validate shgo result:
         if sp.res.x is None:
